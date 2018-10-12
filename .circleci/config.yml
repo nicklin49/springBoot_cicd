@@ -39,11 +39,24 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-        
+      
       # run tests!
       - run: gradle test
+      # - store_test_results:
+      #     path: build/reports/tests/test
+      
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+          when: always
       - store_test_results:
-          path: build/reports/tests/test
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
+      
+      
 
       - run: gradle clean build
       - store_artifacts:
