@@ -24,6 +24,8 @@ jobs:
     steps:
       - checkout
 
+      - run: echo "first use cirleci"
+
       # Download and cache dependencies
       - restore_cache:
           keys:
