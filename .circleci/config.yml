@@ -42,8 +42,10 @@ jobs:
       
       # run tests!
       - run: gradle test
-      # - store_test_results:
-      #     path: build/reports/tests/test
+      - store_test_results:
+          path: build/reports/tests/test/index.html
+      - store_artifacts:
+          path: build/reports/tests/test/index.html
       
       - run:
           name: Save test results
@@ -60,5 +62,5 @@ jobs:
 
       - run: gradle clean build
       - store_artifacts:
-          path: build/libs/springBoot-0.0.1-SNAPSHOT.jar
+          path: ~/springBoot-0.0.1-SNAPSHOT.jar
 
