@@ -52,6 +52,7 @@ jobs:
           command: |
             mkdir -p ~/junit/
             find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+            cp -r build/reports/tests/test/ ~/junit
           when: always
       - store_test_results:
           path: ~/junit
@@ -62,5 +63,5 @@ jobs:
 
       - run: gradle clean build
       - store_artifacts:
-          path: ~/springBoot-0.0.1-SNAPSHOT.jar
+          path: build/springBoot-0.0.1-SNAPSHOT.jar
 
