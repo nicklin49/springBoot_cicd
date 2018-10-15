@@ -63,9 +63,6 @@ jobs:
           name: docker build, run, test
           command: |
             docker build -t "springboot" .
-            echo "build ok."
-            docker run -d -p 8086:8086 --name nickSpringBoot springboot
-            echo "run..."
-            sleep 10
-            curl --retry 10 --retry-delay 5 -v http://localhost:8086
+            docker run -d -p 8086:8086 --name nickSpringBoot springboot; sleep 10
+            curl --retry 10 --retry-delay 5 -v http://localhost:3000
     
