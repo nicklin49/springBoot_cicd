@@ -1,18 +1,8 @@
-# Java Gradle CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
 
     working_directory: ~/repo
 
@@ -23,9 +13,6 @@ jobs:
     
     steps:
       - checkout
-
-      - run: echo "first use cirleci"
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -42,10 +29,6 @@ jobs:
       
       # run tests!
       - run: gradle test
-      - store_test_results:
-          path: build/reports/tests/test/index.html
-      - store_artifacts:
-          path: build/reports/tests/test/index.html
       
       - run:
           name: Save test results
@@ -58,10 +41,13 @@ jobs:
           path: ~/junit
       - store_artifacts:
           path: ~/junit
-      
-      
 
       - run: gradle clean build
+      - run: 
+          name: save jar
+          command: |
+            mkdir -p ~/result
+            mv build/libs/springBoot-0.0.1-SNAPSHOT.jar ~/result/springBoot.jar
       - store_artifacts:
-          path: build/springBoot-0.0.1-SNAPSHOT.jar
+          path: ~/result
 
