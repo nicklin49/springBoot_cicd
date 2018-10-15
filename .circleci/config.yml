@@ -73,7 +73,7 @@ jobs:
         Env: dev
       parallelism: 3
       resource_class: large
-      working_directory: ~/docker
+      # working_directory: ~/docker
       branches:
         only:
           - feature/cicd_docker
