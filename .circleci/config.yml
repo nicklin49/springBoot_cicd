@@ -52,6 +52,13 @@ jobs:
           path: ~/result
 
       
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Install Docker client
+          command: |
+            docker --version
+      
       - run:
           name: docker build, run, test
           command: |
