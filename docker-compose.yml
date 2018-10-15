@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  springboot:
+    image: springboot:latest
+    build: .
+    ports:
+      - 8086:8086
