@@ -54,15 +54,35 @@ jobs:
       
       - setup_remote_docker:
           docker_layer_caching: true
-      - run:
-          name: Install Docker client
-          command: |
-            docker --version
+      # - run:
+      #     name: Install Docker client
+      #     command: |
+      #       docker --version
       
-      - run:
+      # - run:
+      #     name: docker build, run, test
+      #     command: |
+      #       docker build -t "springboot" .
+      #       docker run -d -p 8086:8086 --name nickSpringBoot springboot; sleep 10
+      #       curl --retry 10 --retry-delay 5 -v http://localhost:8086
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+      environment:
+        Env: dev
+      parallelism: 3
+      resource_class: large
+      working_directory: ~/docker
+      branches:
+        only:
+          - feature/cicd_docker
+          # - /rc-.*/
+      steps:
+        - run:
           name: docker build, run, test
           command: |
+            docker --version
             docker build -t "springboot" .
-            docker run -d -p 8086:8086 --name nickSpringBoot springboot; sleep 10
-            curl --retry 10 --retry-delay 5 -v http://localhost:8086
-    
+            docker run -d -p 8086:8086 --name nickSpringBoot springboot #; sleep 10
+            # curl --retry 10 --retry-delay 5 -v http://localhost:8086
