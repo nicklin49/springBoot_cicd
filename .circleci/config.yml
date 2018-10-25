@@ -107,6 +107,12 @@ workflows:
           filters:
             branches:
               only: master
+      - docker_build:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
   
   # 只有在develop上的commit會觸發。test_build, manual deploy(在測試機)
   develop_build_manual_deploy:
