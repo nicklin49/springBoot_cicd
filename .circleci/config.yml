@@ -49,7 +49,7 @@ jobs:
     docekr:
       - image: docker:18.06.1-ce
     working_directory: ~/repo
-      steps:
+    steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
