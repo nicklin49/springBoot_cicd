@@ -58,7 +58,7 @@ jobs:
           command: |
             docker --version
             cd ~/repo
-            docker build -t "springBoot" .
+            docker build -t "springboot" .
       - run:
           name: upload image to docker hub
           command: |
