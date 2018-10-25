@@ -3,13 +3,8 @@ FROM openjdk:8-jdk-alpine
 VOLUME /tmp
 ARG JAVA_OPTS
 ENV JAVA_OPTS=$JAVA_OPTS
-WORKDIR /springboot
-COPY ./ /springboot/
-RUN cd /springboot
 RUN pwd
 RUN ls
-RUN cd /springboot
-RUN gradle clean build
 ADD build/libs/springBoot-0.0.1-SNAPSHOT.jar springboot.jar
 EXPOSE 8086
 ENTRYPOINT exec java $JAVA_OPTS -jar springboot.jar

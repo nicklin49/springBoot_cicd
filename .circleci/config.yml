@@ -47,12 +47,14 @@ jobs:
   
   docker_build:
     docker:
+      - image: circleci/openjdk:8-jdk
       - image: docker:18.06.1-ce
     working_directory: ~/repo
     steps:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
+      - run: gradle clean build
       - run:
           name: build image
           command: |
