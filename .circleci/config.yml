@@ -41,7 +41,7 @@ jobs:
           name: save jar
           command: |
             mkdir -p ~/result
-            mv build/libs/springBoot-0.0.1-SNAPSHOT.jar ~/result/springBoot.jar
+            mv build/libs/springBoot-0.0.1-SNAPSHOT.jar ~/result/build/libs/springBoot-0.0.1-SNAPSHOT.jar
       - store_artifacts:
           path: ~/result
   
@@ -62,7 +62,7 @@ jobs:
       - run:
           name: upload image to docker hub
           command: |
-            docker tag tomcat-mvn-jdk8 motestu23912/gradle-cicd
+            docker tag springboot motestu23912/gradle-cicd
             docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
             docker push motestu23912/gradle-cicd
           
